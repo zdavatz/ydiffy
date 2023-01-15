@@ -30,7 +30,7 @@ Installation
 ------------
 
 ### on Unix
-
+    gem build
     gem install diffy
 
 ### on Windows:
