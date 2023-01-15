@@ -37,7 +37,7 @@ module Diffy
       if ! ['strings', 'files'].include?(@options[:source])
         raise ArgumentError, "Invalid :source option #{@options[:source].inspect}. Supported options are 'strings' and 'files'."
       end
-      @string1, @string2 = string1, string2
+      @string1, @string2 = to_utf8(string1), to_utf8(string2)
     end
 
     def diff
@@ -140,6 +140,16 @@ module Diffy
       end
     end
     private
+
+    def to_utf8(line)
+      return unless line
+      return line if line.encoding.to_s.eql?('UTF-8')
+      if /ISO-8859-1/.match(line.encoding.to_s)
+        line.encode!('UTF-8')
+      else
+        line.force_encoding('UTF-8')
+      end
+    end
 
     @@bin = nil
     def diff_bin
