@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Diffy
   class Diff
     ORIGINAL_DEFAULT_OPTIONS = {
@@ -144,9 +145,9 @@ module Diffy
     def to_utf8(line)
       return unless line
       return line if line.encoding.to_s.eql?('UTF-8')
-      if /ISO-8859-1/.match(line.encoding.to_s)
+      begin
         line.encode!('UTF-8')
-      else
+      rescue
         line.force_encoding('UTF-8')
       end
     end

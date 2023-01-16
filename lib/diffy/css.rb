@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Diffy
   CSS = <<-STYLE
 .diff{overflow:auto;}
