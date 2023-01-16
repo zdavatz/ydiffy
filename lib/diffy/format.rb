@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Diffy
   module Format
     # ANSI color output suitable for terminal output

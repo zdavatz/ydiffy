@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Diffy
   class SplitDiff
     def initialize(left, right, options = {})
