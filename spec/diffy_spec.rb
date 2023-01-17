@@ -6,6 +6,23 @@ class Diffy::Diff
 end
 describe Diffy::Diff do
 
+  describe "diffing two objects which are not strings" do
+    require "ostruct"
+    it "should raise an ArgumentError error if first argument is not a String" do
+      person = OpenStruct.new
+      person.name = "John Smith"
+      expect { Diffy::Diff.new(person, "aString", :source => 'strings') }.to raise_error(ArgumentError)
+    end
+    it "should raise an ArgumentError error if second argument is not a String" do
+      person = OpenStruct.new
+      person.name = "John Smith"
+      expect { Diffy::Diff.new("aString", person, :source => 'strings') }.to raise_error(ArgumentError)
+    end
+  end
+end
+
+describe Diffy::Diff do
+
   describe "diffing two files" do
     def tempfile(string, fn = 'diffy-spec')
       t = Tempfile.new(fn)

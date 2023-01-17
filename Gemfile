@@ -1,7 +1,4 @@
 source 'https://rubygems.org'
 
-platforms :rbx do
-  gem 'rubysl', '~> 2.0'
-end
-
+gem 'pry-byebug'
 gemspec
