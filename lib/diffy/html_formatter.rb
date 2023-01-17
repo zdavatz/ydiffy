@@ -17,7 +17,7 @@ module Diffy
 
     private
     def wrap_line(line)
-      cleaned = clean_line(line)
+      cleaned = to_utf8(clean_line(line))
       case line
       when /^(---|\+\+\+|\\\\)/
         '    <li class="diff-comment"><span>' + line.chomp + '</span></li>'
@@ -42,10 +42,12 @@ module Diffy
     end
 
     def wrap_lines(lines)
+      encoded = lines.collect{ |s| to_utf8(s) }
+      joined = encoded.join("\n")
       if lines.empty?
         %'<div class="diff"></div>'
       else
-        %'<div class="diff">\n  <ul>\n#{lines.join("\n")}\n  </ul>\n</div>\n'
+        %'<div class="diff">\n  <ul>\n#{joined}\n  </ul>\n</div>\n'
       end
     end
 
@@ -131,6 +133,16 @@ module Diffy
           # close and reopen strong tags.  we don't want inline elements
           # spanning block elements which get added later.
           gsub('<LINE_BOUNDARY>',"</strong>\n<strong>") + "</strong>"
+    end
+
+    def to_utf8(line)
+      return unless line
+      return line if line.encoding.to_s.eql?('UTF-8')
+      begin
+        line.encode!('UTF-8')
+      rescue
+        line.force_encoding('UTF-8')
+      end
     end
   end
 end
