@@ -52,8 +52,8 @@ module Diffy
     end
 
     def highlighted_words
-      chunks = @diff.each_chunk.
-        reject{|c| c == '\ No newline at end of file'"\n"}
+      chunks = @diff.each_chunk.reject{|c| c.match(/\ No newline at end of file\n|\ Kein Zeilenumbruch am Dateiende.
+/)}
 
       processed = []
       lines = chunks.each_with_index.map do |chunk1, index|
