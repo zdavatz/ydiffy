@@ -3,3 +3,6 @@
 Gemfile.lock
 tags
 .bundle
+.devenv
+.direnv
+.devenv.flake.nix

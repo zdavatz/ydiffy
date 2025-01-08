@@ -38,6 +38,12 @@ module Diffy
       if ! ['strings', 'files'].include?(@options[:source])
         raise ArgumentError, "Invalid :source option #{@options[:source].inspect}. Supported options are 'strings' and 'files'."
       end
+      if @options[:source].eql?('strings') && !string1.is_a?(String)
+         raise ArgumentError, "#{!string1} is not a String, but #{string1.class}"
+      end
+      if @options[:source].eql?('strings') && !string2.is_a?(String)
+         raise ArgumentError, "#{!string2} is not a String, but #{string2.class}"
+      end
       @string1, @string2 = string1, string2
     end
 

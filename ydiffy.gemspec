@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Ydiffy is a fork of diffy to work around a problem in odba"
   spec.homepage      = "http://github.com/zdavatz/ydiffy"
   spec.license       = "MIT"
+  spec.required_ruby_version = '>= 2.5'
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
